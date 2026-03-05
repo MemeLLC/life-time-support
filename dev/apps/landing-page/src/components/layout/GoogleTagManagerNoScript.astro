@@ -1,0 +1,17 @@
+---
+const isProd = import.meta.env.PROD;
+const gtmContainerId = import.meta.env.PUBLIC_GTM_CONTAINER_ID;
+---
+
+{
+  isProd && gtmContainerId && (
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${gtmContainerId}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      />
+    </noscript>
+  )
+}

@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ArrowRight, Images, Route, HelpCircle, Gift } from "lucide-react";
+
+const links = [
+  {
+    href: "/gallery",
+    label: "GALLERY",
+    title: "施工事例",
+    description: "エコカラット、フロアコーティングなど実際の施工事例をご覧いただけます",
+    Icon: Images,
+    accent: "from-primary to-amber-500",
+  },
+  {
+    href: "/flow",
+    label: "FLOW",
+    title: "ご利用の流れ",
+    description: "お問い合わせから施工完了まで、5つのステップでご案内します",
+    Icon: Route,
+    accent: "from-secondary to-blue-400",
+  },
+  {
+    href: "/faq",
+    label: "FAQ",
+    title: "よくあるご質問",
+    description: "お客様からよくいただくご質問をまとめました",
+    Icon: HelpCircle,
+    accent: "from-emerald-500 to-teal-400",
+  },
+  {
+    href: "/offers",
+    label: "OFFERS",
+    title: "特別オファー",
+    description: "ライフタイムサポートをご利用のお客様限定の特別サービス",
+    Icon: Gift,
+    accent: "from-rose-500 to-pink-400",
+  },
+];
+---
+
+<Layout>
+  <main class="min-h-screen overflow-hidden">
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-24 lg:py-32">
+      <!-- Background decorations -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+        <div class="bg-primary/5 absolute -top-40 -right-40 h-96 w-96 rounded-full blur-3xl"></div>
+        <div class="bg-secondary/5 absolute -bottom-40 -left-40 h-96 w-96 rounded-full blur-3xl">
+        </div>
+        <div
+          class="bg-gradient-radial from-primary/3 absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full to-transparent"
+        >
+        </div>
+      </div>
+
+      <div class="relative mx-auto max-w-6xl px-6">
+        <!-- Header -->
+        <div class="hero-content mb-16 text-center md:mb-24">
+          <div class="mb-8 inline-flex items-center gap-3">
+            <span class="to-primary h-[2px] w-16 bg-linear-to-r from-transparent"></span>
+            <span class="text-primary text-xs font-bold tracking-[0.4em] uppercase"
+              >Lifetime Support</span
+            >
+            <span class="to-primary h-[2px] w-16 bg-linear-to-l from-transparent"></span>
+          </div>
+
+          <h1
+            class="text-foreground mb-6 text-4xl leading-[1.1] font-black tracking-tight sm:text-5xl md:text-7xl"
+          >
+            住まいの<span class="text-primary relative">
+              価値
+              <svg
+                class="text-primary/30 absolute -bottom-2 left-0 h-3 w-full"
+                viewBox="0 0 100 12"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M0,8 Q25,0 50,8 T100,8"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  fill="none"
+                  stroke-linecap="round"></path>
+              </svg>
+            </span>を<br class="sm:hidden" />高める
+          </h1>
+
+          <p class="text-foreground/60 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
+            エコカラット・フロアコーティング・窓ガラスフィルムなど<br class="hidden md:block" />
+            新築マンションの快適な暮らしをサポートします
+          </p>
+        </div>
+
+        <!-- Navigation Cards -->
+        <div class="grid gap-4 sm:grid-cols-2 md:gap-6">
+          {
+            links.map((link, index) => (
+              <a
+                href={link.href}
+                class="nav-card group border-foreground/5 hover:border-primary/20 relative overflow-hidden rounded-3xl border bg-white p-6 shadow-[0_4px_40px_rgba(0,0,0,0.04)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] md:p-8"
+                style={`animation-delay: ${index * 100}ms`}
+              >
+                <div
+                  class={`absolute inset-0 bg-linear-to-br ${link.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-[0.03]`}
+                />
+
+                <div class="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-linear-to-br to-transparent" />
+
+                <div class="relative">
+                  <div class="mb-4 flex items-center gap-4">
+                    <div
+                      class={`h-14 w-14 rounded-2xl bg-linear-to-br ${link.accent} flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                    >
+                      <link.Icon size={26} strokeWidth={1.5} />
+                    </div>
+                    <span class="text-foreground/30 text-xs font-bold tracking-[0.2em]">
+                      {link.label}
+                    </span>
+                  </div>
+
+                  <h2 class="text-foreground group-hover:text-primary mb-2 text-xl font-bold tracking-tight transition-colors duration-300 md:text-2xl">
+                    {link.title}
+                  </h2>
+                  <p class="text-foreground/50 mb-4 text-sm leading-relaxed md:text-base">
+                    {link.description}
+                  </p>
+
+                  <div class="text-primary flex items-center gap-2 text-sm font-medium">
+                    <span class="-translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                      詳しく見る
+                    </span>
+                    <ArrowRight
+                      size={18}
+                      className="transform group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class={`absolute right-0 bottom-0 left-0 h-1 bg-linear-to-r ${link.accent} origin-left scale-x-0 transform transition-transform duration-500 group-hover:scale-x-100`}
+                />
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Footer message -->
+        <div class="footer-content mt-16 text-center md:mt-24">
+          <p class="text-foreground/40 text-sm md:text-base">
+            ご不明な点がございましたら、お気軽にメッセージをお送りください。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .hero-content {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .nav-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .footer-content {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.5s forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Custom radial gradient */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+</style>

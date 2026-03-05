@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+import achievementsImage from "@assets/achievements.png";
+import { ArrowUpRight } from "lucide-react";
+import ceoImage from "@assets/ceo.png";
+
+const lineUrl = import.meta.env.PUBLIC_LINE_URL;
+---
+
+<section id="トップ" class="pt-16">
+  <div
+    class="space-y-8 bg-linear-to-b from-[#1D1C1B]/0 via-[#1D1C1B]/50 via-55% to-[#1D1C1B] p-6 text-neutral-100"
+  >
+    <div class="space-y-4">
+      <p class="text-center font-black italic">
+        <span class="block">マンションオプション工事のプロが</span>
+        <span class="block">住まいを最適に仕上げます</span>
+      </p>
+      <div class="h-[3px] bg-neutral-100"></div>
+      <h2 class="text-center font-extrabold italic">
+        <span class="block">
+          <span class="text-5xl">必要な工事</span>
+          <span class="text-3xl">だけを</span>
+        </span>
+        <span class="block">
+          <span class="text-5xl">適正価格</span>
+          <span class="text-3xl">で</span>
+        </span>
+      </h2>
+    </div>
+    <div class="space-y-6 font-bold text-neutral-900">
+      <div class="space-y-2">
+        <div class="w-fit bg-neutral-100 px-2 py-1">
+          <p class="text-xs">フロアコーティング・エコカラット・収納・鏡・フィルムなど</p>
+        </div>
+        <div class="w-fit bg-neutral-100 px-2 py-1">
+          <p>マンション専門スタッフが</p>
+        </div>
+        <div class="w-fit bg-neutral-100 px-2 py-1 text-orange-500">
+          <p>“あなたの住まいにちょうど良い工事”</p>
+        </div>
+        <div class="w-fit bg-neutral-100 px-2 py-1">
+          <p>だけを最終提案。</p>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <div class="w-fit bg-neutral-100 px-2 py-1">
+          <p class="text-xs">中間マージンを排除した適正価格で、</p>
+        </div>
+        <div class="w-fit bg-neutral-100 px-2 py-1 text-orange-500">
+          <p>新しい暮らしに“安心”と“満足”をプラス。</p>
+        </div>
+      </div>
+    </div>
+    <Image
+      src={achievementsImage}
+      alt="施工実績"
+      width={800}
+      class="w-full"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="relative flex flex-col items-center gap-2 overflow-x-clip bg-orange-500 py-6">
+    <p class="z-10 font-bold text-neutral-100">24時間お問い合わせ可能</p>
+    <a
+      href={lineUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button button-outline z-10"
+      data-variant="outline"
+    >
+      <p>LINEで簡単お問い合わせ</p>
+      <div
+        class="flex aspect-square h-full items-center justify-center rounded-full bg-orange-500 p-1 text-neutral-100"
+      >
+        <ArrowUpRight size={24} />
+      </div>
+    </a>
+    <Image
+      src={ceoImage}
+      alt="代表者"
+      width={576}
+      class="absolute -right-20 bottom-0 z-0 w-72"
+      loading="eager"
+    />
+  </div>
+</section>

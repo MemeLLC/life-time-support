@@ -1,0 +1,127 @@
+# Project-local Codex rules.
+# Ref: https://developers.openai.com/codex/rules
+# NOTE: `pattern` is prefix token matching (no generic path glob for args).
+
+# Align approval style with .claude/settings.json allow-list workflow.
+prefix_rule(
+  pattern = ["pnpm", "run"],
+  decision = "allow",
+  justification = "Allow project scripts",
+)
+prefix_rule(
+  pattern = ["pnpm", "test"],
+  decision = "allow",
+  justification = "Allow tests",
+)
+prefix_rule(
+  pattern = ["git", "diff"],
+  decision = "allow",
+  justification = "Allow local review workflow",
+)
+prefix_rule(
+  pattern = ["git", "log"],
+  decision = "allow",
+  justification = "Allow local review workflow",
+)
+prefix_rule(
+  pattern = ["git", "status"],
+  decision = "allow",
+  justification = "Allow local review workflow",
+)
+prefix_rule(
+  pattern = ["ls"],
+  decision = "allow",
+  justification = "Allow local inspection",
+)
+prefix_rule(
+  pattern = ["find"],
+  decision = "allow",
+  justification = "Allow local inspection",
+)
+prefix_rule(
+  pattern = ["awk"],
+  decision = "allow",
+  justification = "Allow text processing",
+)
+prefix_rule(
+  pattern = ["tr"],
+  decision = "allow",
+  justification = "Allow text processing",
+)
+prefix_rule(
+  pattern = ["sort"],
+  decision = "allow",
+  justification = "Allow text processing",
+)
+prefix_rule(
+  pattern = ["uniq"],
+  decision = "allow",
+  justification = "Allow text processing",
+)
+
+# Common version/help calls.
+prefix_rule(
+  pattern = [["pnpm", "git", "node", "npm", "bun", "python", "python3", "wrangler"], "--version"],
+  decision = "allow",
+  justification = "Allow tooling version checks",
+)
+prefix_rule(
+  pattern = [["pnpm", "git", "node", "npm", "bun", "python", "python3", "wrangler"], "--help"],
+  decision = "allow",
+  justification = "Allow tooling help checks",
+)
+
+# Hard blocks.
+prefix_rule(
+  pattern = ["git", "push"],
+  decision = "forbidden",
+  justification = "git push is blocked by project policy.",
+)
+
+# NOTE:
+# execpolicy rules match exact argv token prefixes.
+# They do not support wildcard expansion for arbitrary file paths.
+# Keep these rules explicit to avoid a false sense of coverage.
+
+# Block direct reads of sensitive env files at repo root.
+prefix_rule(
+  pattern = [
+    ["cat", "sed", "awk", "grep", "rg", "head", "tail", "less", "more", "bat"],
+    [".env", "./.env", ".env.local", "./.env.local", ".env.development", "./.env.development", ".env.production", "./.env.production", ".env.test", "./.env.test", ".env.staging", "./.env.staging", ".dev.vars", "./.dev.vars"],
+  ],
+  decision = "forbidden",
+  justification = "Reading environment files is blocked by project policy.",
+)
+
+# Block direct edits of sensitive env files at repo root.
+prefix_rule(
+  pattern = [
+    ["cp", "mv", "rm", "touch", "chmod", "chown"],
+    [".env", "./.env", ".env.local", "./.env.local", ".env.development", "./.env.development", ".env.production", "./.env.production", ".env.test", "./.env.test", ".env.staging", "./.env.staging", ".dev.vars", "./.dev.vars"],
+  ],
+  decision = "forbidden",
+  justification = "Editing environment files is blocked by project policy.",
+)
+
+# Block common force variants (e.g. rm -f .env).
+prefix_rule(
+  pattern = [
+    "rm",
+    ["-f", "--force", "-rf", "-fr"],
+    [".env", "./.env", ".env.local", "./.env.local", ".env.development", "./.env.development", ".env.production", "./.env.production", ".env.test", "./.env.test", ".env.staging", "./.env.staging", ".dev.vars", "./.dev.vars"],
+  ],
+  decision = "forbidden",
+  justification = "Editing environment files is blocked by project policy.",
+)
+
+prefix_rule(
+  pattern = ["find", ".", "-name", [".env", ".env.local", ".env.development", ".env.production", ".env.test", ".env.staging", ".dev.vars"]],
+  decision = "forbidden",
+  justification = "Listing environment files is blocked by project policy.",
+)
+
+prefix_rule(
+  pattern = ["rg", "--files", "-g", [".env", ".env*", ".dev.vars", ".dev.vars*", "**/.env", "**/.env*", "**/.dev.vars", "**/.dev.vars*"]],
+  decision = "forbidden",
+  justification = "Listing environment files is blocked by project policy.",
+)

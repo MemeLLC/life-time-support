@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AccompanyOffer from "./_AccompanyOffer.astro";
+---
+
+<Layout>
+  <main class="min-h-screen overflow-hidden">
+    <section class="py-8 sm:py-16">
+      <div class="relative mx-auto max-w-4xl">
+        <div class="mb-12 px-6 text-center md:mb-16 md:px-10">
+          <div class="mb-6 inline-flex items-center gap-2">
+            <span class="bg-primary h-[2px] w-12"></span>
+            <span class="text-primary text-sm font-bold tracking-[0.3em]">OFFERS</span>
+            <span class="bg-primary h-[2px] w-12"></span>
+          </div>
+          <h1 class="text-foreground mb-6 text-4xl font-black tracking-tight md:text-6xl">
+            特典・<span class="text-primary">割引内容</span>
+          </h1>
+          <p class="text-foreground/60 mx-auto max-w-2xl text-lg leading-relaxed">
+            ライフタイムサポートをご利用のお客様限定の特別サービスです
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <AccompanyOffer />
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

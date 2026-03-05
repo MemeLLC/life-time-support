@@ -1,0 +1,13 @@
+---
+import type { Metadata } from "@lib/metadata.types";
+
+interface Props {
+  metadata: Metadata;
+}
+
+const { metadata } = Astro.props;
+---
+
+<title>{metadata.title}</title>
+<meta name="description" content={metadata.description} />
+<meta name="robots" content="noindex, nofollow" />

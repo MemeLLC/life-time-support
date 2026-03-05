@@ -1,0 +1,10 @@
+dist/
+coverage/
+node_modules/
+.astro/
+.wrangler/
+.agents/
+.claude/
+.codex/
+pnpm-lock.yaml
+wrangler.jsonc

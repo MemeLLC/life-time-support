@@ -1,0 +1,63 @@
+{
+  "name": "@life-time-support/components",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    "./turnstile": {
+      "types": "./src/turnstile/index.ts",
+      "import": "./src/turnstile/index.ts"
+    },
+    "./contact": {
+      "types": "./src/contact/index.ts",
+      "import": "./src/contact/index.ts"
+    },
+    "./contact-details": {
+      "types": "./src/contact/use-submit-contact-details.ts",
+      "import": "./src/contact/use-submit-contact-details.ts"
+    },
+    "./session-storage": {
+      "types": "./src/hooks/use-session-storage.ts",
+      "import": "./src/hooks/use-session-storage.ts"
+    },
+    "./in-view": {
+      "types": "./src/hooks/use-in-view.ts",
+      "import": "./src/hooks/use-in-view.ts"
+    },
+    "./media-query": {
+      "types": "./src/hooks/use-media-query.ts",
+      "import": "./src/hooks/use-media-query.ts"
+    },
+    "./on-mount": {
+      "types": "./src/hooks/use-on-mount.ts",
+      "import": "./src/hooks/use-on-mount.ts"
+    },
+    "./location": {
+      "types": "./src/hooks/use-location.ts",
+      "import": "./src/hooks/use-location.ts"
+    }
+  },
+  "dependencies": {
+    "@life-time-support/types": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "jsdom": "^27.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "vitest": "^4.0.18"
+  }
+}

@@ -1,0 +1,185 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import customer1Image from "@assets/customer1.svg";
+import customer2Image from "@assets/customer2.svg";
+import customer3Image from "@assets/customer3.svg";
+import customer4Image from "@assets/customer4.svg";
+import { Section9Collapsible, type Section9CollapsibleProps } from "./_Section9Collapsible";
+
+interface Customer {
+  image: ImageMetadata;
+  name: string;
+  quote: string;
+  item: Section9CollapsibleProps;
+}
+
+const customers: Customer[] = [
+  {
+    image: customer1Image,
+    name: "A様／30代／会社員（共働き）",
+    quote: "内覧会の見落としが不安でしたが、プロのチェックで「大丈夫」と思える状態にできました。",
+    item: {
+      profile: {
+        family: "ご夫婦＋お子さま1人",
+        area: "東京都江東区",
+        property: "新築分譲マンション（3LDK）",
+        budget: "約120万円",
+        request: "内覧会同行・オプション工事相談",
+      },
+      testimonials: [
+        {
+          title: "住まい検討のきっかけ",
+          value:
+            "新築マンションを購入しましたが、正直なところ内覧会については「形式的なもの」「見るだけで終わるもの」という認識でした。\n初めての購入でもあり、何をどう見ればいいのかも分からず、このまま引き渡しを受けて大丈夫なのか不安がありました。",
+        },
+        {
+          title: "内覧会同行で感じたこと",
+          value:
+            "ライフタイムサポートさんに同行をお願いして、その認識が完全に変わりました。\n床や壁、建具、設備などを一つひとつ確認していく中で、私たちでは到底気づかないような施工精度のズレや不具合を次々と指摘してくださり、結果的に10箇所以上の是正対応につながりました。\nデベロッパーに対しても、感情的ではなく「なぜ是正が必要なのか」を論理的に説明してくれるので、その場のやり取りも非常にスムーズでした。",
+        },
+        {
+          title: "工事相談をしてよかった点",
+          value:
+            "内覧会後はオプション工事についても相談しましたが、「やった方がいい工事」「今はやらなくていい工事」を明確に分けて説明してもらえたのが印象的でした。\n予算ありきで話すのではなく、住んだ後の生活や将来のメンテナンスまで見据えた現実的な提案だったので、納得して判断できました。",
+        },
+        {
+          title: "ライフタイムサポートを選んでよかった理由",
+          value:
+            "もし自分たちだけで内覧会に参加していたら、多くの不具合を見逃したまま引き渡しを受けていたと思います。\n専門家に第三者目線でチェックしてもらうことの重要性を強く実感しました。",
+        },
+      ],
+    },
+  },
+  {
+    image: customer2Image,
+    name: "B様／40代／自営業",
+    quote: "不安で「全部やるべき？」となっていましたが、本当に必要な工事だけに絞れました。",
+    item: {
+      profile: {
+        family: "ご夫婦",
+        area: "神奈川県横浜市",
+        property: "新築マンション（2LDK）",
+        budget: "約90万円",
+        request: "オプション工事整理・見積精査",
+      },
+      testimonials: [
+        {
+          title: "住まい検討時の悩み",
+          value:
+            "マンション購入にあたり、オプション工事の内容と金額が想像以上に多く、「どこまでやるべきか」「削って後悔しないか」で悩んでいました。",
+        },
+        {
+          title: "相談して驚いたこと",
+          value:
+            "相談してみてまず驚いたのは、「これは今やらなくて大丈夫です」とはっきり言ってもらえたことです。\n売る立場ではなく、施主側の視点で「やらない選択肢」を提示してくれたことで、一度立ち止まって冷静に考えることができました。",
+        },
+        {
+          title: "工事予算の考え方が変わった",
+          value:
+            "当初は150万円近くを想定していましたが、本当に必要な工事だけに絞った結果、最終的な工事予算は約90万円に収まりました。\nその分、入居後に必要になった家具や家電に余裕を持って予算を回すことができました。",
+        },
+        {
+          title: "信頼できると感じた理由",
+          value:
+            "良いことだけでなく、「やらなくていい理由」「後回しにできる理由」を丁寧に説明してくれた点に信頼を感じました。\n入居後の工事も受け付けているとのことだったので、生活の変化に合わせて他の工事もお願いしたいと思っています。",
+        },
+      ],
+    },
+  },
+  {
+    image: customer3Image,
+    name: "C様／30代／共働き",
+    quote: "何が正解か分からない中でも、判断の軸を一つずつ示してくれました。",
+    item: {
+      profile: {
+        family: "ご夫婦",
+        area: "東京都世田谷区",
+        property: "中古マンション（築18年・3LDK）",
+        budget: "約180万円",
+        request: "内覧同行・改修工事相談",
+      },
+      testimonials: [
+        {
+          title: "中古マンション購入後の不安",
+          value:
+            "中古物件は価格面で魅力がありましたが、設備の状態や将来の修繕リスクが分からず、専門業者にお願いしたかった。",
+        },
+        {
+          title: "専門家の視点での説明",
+          value:
+            "現地調査をしてもらい、「今の状態で問題ない点」「将来的に注意すべき点」をはっきり分けて説明してもらえたことで、漠然とした不安が整理されていきました。",
+        },
+        {
+          title: "工事の考え方",
+          value:
+            "見た目を新しくする工事だけでなく、住んだ後に影響が出やすい部分を優先する考え方を教えてもらい、工事内容と予算のバランスを納得して決めることができました。",
+        },
+      ],
+    },
+  },
+  {
+    image: customer4Image,
+    name: "D様／50代／会社役員",
+    quote: "良いことだけでなく、リスクも含めて説明が丁寧で、「任せて大丈夫」と思えました。",
+    item: {
+      profile: {
+        family: "ご夫婦",
+        area: "千葉県浦安市",
+        property: "新築マンション（4LDK）",
+        budget: "約200万円",
+        request: "工事全体設計・内覧会同行",
+      },
+      testimonials: [
+        {
+          title: "他社との違い",
+          value:
+            "複数社に相談しましたが、ライフタイムサポートさんはリスクやデメリットについても包み隠さず説明してくれました。",
+        },
+        {
+          title: "長期視点での提案",
+          value:
+            "目先の便利さではなく、将来の資産価値やメンテナンス性を踏まえた提案だったため、長く住む家として安心して任せられると感じました。",
+        },
+      ],
+    },
+  },
+];
+---
+
+<section id="お客様の声" class="bg-orange-100">
+  <div class="space-y-6 p-6">
+    <header class="text-center">
+      <h2 class="text-2xl font-bold">お客様の声</h2>
+    </header>
+
+    {
+      customers.map((customer) => (
+        <article class="overflow-hidden rounded-4xl border border-orange-500">
+          <div class="bg-orange-500 p-6 font-bold text-neutral-100">
+            <p>{customer.quote}</p>
+          </div>
+          <div class="space-y-4 bg-neutral-100 p-4">
+            <div class="flex items-center gap-4">
+              <div class="w-[104px] shrink-0 space-y-2">
+                <Image
+                  src={customer.image}
+                  alt={customer.name}
+                  width={100}
+                  height={100}
+                  class="size-[104px] rounded-full bg-orange-100"
+                />
+                <p class="text-center text-xs">{customer.name}</p>
+              </div>
+              <p class="text-xs">{customer.quote}</p>
+            </div>
+          </div>
+
+          <Section9Collapsible {...customer.item} client:visible />
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mt-6 h-9 w-full bg-neutral-100 [clip-path:polygon(50%_0,0_100%,100%_100%)]"></div>
+</section>

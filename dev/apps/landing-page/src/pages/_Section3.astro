@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import lifeTimeSupportImage from "@assets/life-time-support.png";
+import point1Image from "@assets/point1.jpg";
+import point2Image from "@assets/point2.jpg";
+import point3Image from "@assets/point3.jpg";
+import point4Image from "@assets/point4.jpg";
+
+interface Point {
+  label: string;
+  title: string;
+  eyebrow: string;
+  image: ImageMetadata;
+  list: string[];
+}
+
+const points: Point[] = [
+  {
+    label: "Point ①",
+    title: "内覧会同行サービス",
+    eyebrow: "初めてでも“後悔ゼロ”",
+    image: point1Image,
+    list: [
+      "傷・汚れ・歪みを専門家目線でチェック",
+      "見落としゼロの内覧会同行",
+      "管理会社への指摘も代行",
+      "報告書をLINEで共有",
+    ],
+  },
+  {
+    label: "Point ②",
+    title: "適正価格",
+    eyebrow: "安いのではなく、本来の適正価格。",
+    image: point2Image,
+    list: [
+      "中間マージンの排除",
+      "直契約で無駄なコストなし",
+      "必要な工事だけを最適提案",
+      "大量仕入れでコスト削減",
+    ],
+  },
+  {
+    label: "Point ③",
+    title: "信頼できる施工体制",
+    eyebrow: "高品質 × 長持ち × トラブルゼロ ",
+    image: point3Image,
+    list: [
+      "年間600件以上のマンション工事",
+      "規約・構造を理解した専門スタッフ",
+      "施工後もLINEでサポート",
+      "実績データに基づく最適提案",
+    ],
+  },
+  {
+    label: "Point ④",
+    title: "豊富な選択肢からご提案",
+    eyebrow: "お客様の“味方”として提案します ",
+    image: point4Image,
+    list: [
+      "生活導線に合わせて最適工事の提案",
+      "高額工事でも必要なければ提案しない",
+      "他社見積もりとの比較診断OK",
+    ],
+  },
+];
+---
+
+<section id="ライフタイムサポートとは" class="bg-neutral-100">
+  <div class="h-9 w-full bg-orange-100 [clip-path:polygon(0_0,100%_0,50%_100%)]"></div>
+  <div class="space-y-12 px-6 py-12">
+    <h2 class="sr-only">ライフタイムサポートとは</h2>
+    <div class="space-y-4">
+      <Image
+        src={lifeTimeSupportImage}
+        alt="ライフタイムサポート"
+        width={800}
+        class="w-full"
+        loading="lazy"
+      />
+      <p>
+        私たちは、新築マンション購入後の5年後、10年後も「頼んでよかった」と心から思える
+        <span class="font-bold text-orange-500"
+          >“最適な住まいづくり”を実現するマンションオプション工事の専門プロ集団</span
+        >
+        です。
+        <br /><br />
+        <span class="block text-center">
+          決して、
+          <span class="font-bold">「不要な工事を押し売りする業者」</span>
+          ではありません。
+        </span>
+      </p>
+    </div>
+    <div class="space-y-6">
+      {
+        points.map((point) => (
+          <article class="space-y-4 overflow-hidden rounded-4xl border border-orange-500 pb-4">
+            <div class="flex">
+              <div class="w-fit bg-orange-500 py-2 pr-2 pl-6 font-bold text-neutral-100">
+                {point.label}
+              </div>
+              <div
+                class="min-h-full w-[30px] scale-101 bg-orange-500 [clip-path:polygon(0_0,0_100%,100%_0)]"
+                aria-hidden="true"
+              />
+            </div>
+            <div class="space-y-3 px-6">
+              <header class="text-center">
+                <p class="text-xs">\ {point.eyebrow} /</p>
+                <h3 class="mt-1 text-2xl font-bold text-neutral-700">“{point.title}”</h3>
+              </header>
+              <Image
+                src={point.image}
+                alt={point.title}
+                width={584}
+                class="h-[164px] w-full rounded-[8px] object-cover"
+                loading="lazy"
+              />
+              <ul class="list-inside list-disc text-xs">
+                {point.list.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <p class="text-center">
+      ライフタイムサポートはオプション工事を売る営業ではなく、
+      <span class="font-bold"
+        >お客様が実現したい生活を踏まえて、お困りごとを解決しながら、一緒に理想のオプション工事を探す企業</span
+      >
+      です。
+    </p>
+  </div>
+</section>

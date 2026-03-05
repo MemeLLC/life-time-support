@@ -1,0 +1,13 @@
+---
+import { Image } from "astro:assets";
+import backgroundImage from "@assets/background.jpg";
+---
+
+<Image
+  src={backgroundImage}
+  alt=""
+  width={1920}
+  class="fixed inset-0 -z-10 h-full w-full object-cover"
+  loading="eager"
+  fetchpriority="high"
+/>

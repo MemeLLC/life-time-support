@@ -1,0 +1,17 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<aside
+  class:list={[
+    "hidden h-screen flex-1 flex-col items-center justify-center bg-[rgba(29,28,27,0.5)] px-6 lg:flex",
+    className,
+  ]}
+>
+  <slot />
+</aside>

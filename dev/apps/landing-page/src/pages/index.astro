@@ -1,0 +1,51 @@
+---
+import Layout from "@components/layout/Layout.astro";
+import type { Metadata } from "@lib/metadata.types";
+import Main from "@components/blocks/Main.astro";
+import Background from "./_Background.astro";
+import Section1 from "./_Section1.astro";
+import Section2 from "./_Section2.astro";
+import Section3 from "./_Section3.astro";
+import Section4 from "./_Section4.astro";
+import Section5 from "./_Section5.astro";
+import Section6 from "./_Section6.astro";
+import Section7 from "./_Section7.astro";
+import Section8 from "./_Section8.astro";
+import Section9 from "./_Section9.astro";
+import Section10 from "./_Section10.astro";
+import Section11 from "./_Section11.tsx";
+import Section12 from "./_Section12.astro";
+import Footer from "./_Footer";
+import Left from "./_Left.astro";
+import Right from "./_Right.astro";
+import FixedCTA from "./_FixedCTA.tsx";
+
+const metadata: Metadata = {
+  title: "首都圏マンションオプション工事はライフタイムサポート",
+  description:
+    "ライフタイムサポートは、東京、神奈川、埼玉、千葉を中心にお客様の暮らしを最適に仕上げるマンションオプション工事の専門集団です。",
+};
+---
+
+<Layout metadata={metadata} className="flex h-screen overflow-hidden">
+  <Background />
+  <Left />
+  <Main>
+    <h1 class="sr-only">マンションオプション工事はライフタイムサポート</h1>
+    <FixedCTA client:visible />
+    <Section1 />
+    <Section2 />
+    <Section3 />
+    <Section4 />
+    <Section5 />
+    <Section6 />
+    <Section7 />
+    <Section8 />
+    <Section9 />
+    <Section10 />
+    <Section11 client:visible />
+    <Section12 />
+    <Footer client:visible />
+  </Main>
+  <Right />
+</Layout>

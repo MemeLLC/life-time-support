@@ -1,0 +1,41 @@
+---
+import { ArrowUpRight } from "lucide-react";
+import { Image } from "astro:assets";
+import woodsImage from "@assets/woods.jpg";
+import { Section4Carousel } from "./_Section4Carousel";
+
+const lineUrl = import.meta.env.PUBLIC_LINE_URL;
+---
+
+<section id="オプション工事メニュー" class="relative">
+  <Image
+    src={woodsImage}
+    alt=""
+    class="absolute inset-0 h-full w-full object-cover"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-white/90" aria-hidden="true"></div>
+  <div class="relative z-10 flex flex-col gap-10">
+    <div class="h-9 w-full bg-neutral-100 [clip-path:polygon(0_0,100%_0,50%_100%)]"></div>
+    <h2 class="text-center text-2xl font-bold">
+      <span class="block"> LTSの </span>
+      <span class="block"> オプション工事メニュー </span>
+    </h2>
+    <Section4Carousel client:load />
+    <a
+      href={lineUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button mx-auto w-fit"
+      data-variant="default"
+    >
+      <p>LINEで簡単お問い合わせ</p>
+      <div
+        class="flex aspect-square h-full items-center justify-center rounded-full bg-neutral-100 p-1 text-orange-500"
+      >
+        <ArrowUpRight size={24} />
+      </div>
+    </a>
+    <div class="h-9 w-full bg-neutral-100 [clip-path:polygon(50%_0,0_100%,100%_100%)]"></div>
+  </div>
+</section>

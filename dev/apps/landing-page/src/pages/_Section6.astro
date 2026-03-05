@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import case1Image from "@assets/case1.jpg";
+import case2Image from "@assets/case2.jpg";
+import case3Image from "@assets/case3.jpg";
+import case1PriceImage from "@assets/case1-price.png";
+import case2PriceImage from "@assets/case2-price.png";
+import case3PriceImage from "@assets/case3-price.png";
+import { Check } from "lucide-react";
+
+interface Case {
+  caseNumber: number;
+  roomType: string;
+  options: string[];
+  image: ImageMetadata;
+  priceImage: ImageMetadata;
+}
+
+const cases: Case[] = [
+  {
+    caseNumber: 1,
+    roomType: "3LDK",
+    options: ["フロアコーティング", "エコカラット", "フィルム", "可動棚"],
+    image: case1Image,
+    priceImage: case1PriceImage,
+  },
+  {
+    caseNumber: 1,
+    roomType: "3LDK",
+    options: ["鏡", "カップボード", "水回りコーティング"],
+    image: case2Image,
+    priceImage: case2PriceImage,
+  },
+  {
+    caseNumber: 1,
+    roomType: "3LDK",
+    options: [
+      "エコカラット（リビング全面）",
+      "バルコニータイル（8㎡）",
+      "窓ガラスフィルム（断熱+UVカット）",
+    ],
+    image: case3Image,
+    priceImage: case3PriceImage,
+  },
+];
+---
+
+<section id="施工事例" class="bg-neutral-100">
+  <div class="space-y-6 p-6">
+    <h2 class="text-center text-2xl font-bold">施工事例</h2>
+
+    <div class="space-y-6">
+      {
+        cases.map((caseItem) => (
+          <article class="overflow-hidden rounded-4xl border border-orange-500 bg-white">
+            <Image
+              src={caseItem.image}
+              alt={`${caseItem.roomType}の施工事例`}
+              width={800}
+              class="h-[240px] w-full object-cover"
+              loading="lazy"
+            />
+
+            <div class="space-y-4 p-4">
+              <ul class="flex flex-wrap gap-x-4 gap-y-2">
+                {caseItem.options.map((option) => (
+                  <li class="flex items-center gap-1 text-sm">
+                    <Check
+                      size={16}
+                      strokeWidth={2}
+                      className="bg-orange-500 text-white rounded-full p-0.5"
+                    />
+                    <span class="text-xs">{option}</span>
+                  </li>
+                ))}
+              </ul>
+              <Image
+                src={caseItem.priceImage}
+                alt={`${caseItem.roomType}の価格`}
+                width={480}
+                class="mx-auto w-[240px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+  <div class="h-9 w-full bg-orange-100 [clip-path:polygon(50%_0,0_100%,100%_100%)]"></div>
+</section>

@@ -1,0 +1,12 @@
+---
+import { Image } from "astro:assets";
+import pricingImage from "@assets/pricing.png";
+---
+
+<section id="料金・比較表" class="space-y-6 bg-neutral-100 pt-8">
+  <header class="text-center">
+    <h2 class="text-2xl font-bold">料金・比較表</h2>
+  </header>
+  <Image src={pricingImage} alt="Pricing" width={800} class="mx-auto w-full" loading="lazy" />
+  <div class="h-9 w-full bg-orange-100 [clip-path:polygon(50%_0,0_100%,100%_100%)]"></div>
+</section>

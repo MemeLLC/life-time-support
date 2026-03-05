@@ -1,0 +1,42 @@
+---
+import Aside from "@/components/blocks/Aside.astro";
+import { Image } from "astro:assets";
+import companyImage from "@assets/company.png";
+import { Mail } from "lucide-react";
+import lineImage from "@assets/line.svg";
+
+const lineUrl = import.meta.env.PUBLIC_LINE_URL;
+---
+
+<Aside>
+  <Image
+    src={companyImage}
+    alt="Company"
+    width={1000}
+    height={1000}
+    class="h-auto w-full object-cover"
+  />
+  <div class="mt-12 flex w-full flex-col items-center gap-4 text-white">
+    <p class="text-xs font-bold">\ 24時間お問い合わせ可能 /</p>
+    <a
+      href={lineUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex w-full items-center justify-center gap-2 rounded-full bg-[#06C755] py-4 transition-all hover:opacity-90"
+    >
+      <Image src={lineImage} alt="LINE" width={24} height={24} />
+      <p class="font-bold">
+        LINE<span class="text-xs">でお問い合わせ</span>
+      </p>
+    </a>
+    <a
+      href="/contact"
+      class="flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 py-4 transition-all hover:opacity-90"
+    >
+      <Mail size={24} />
+      <p class="font-bold">
+        メール<span class="text-xs">でお問い合わせ</span>
+      </p>
+    </a>
+  </div>
+</Aside>

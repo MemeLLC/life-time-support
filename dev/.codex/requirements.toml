@@ -1,0 +1,15 @@
+version = 1
+
+# NOTE:
+# This file is for administrators and is read from /etc/codex/requirements.toml.
+# Project-local policy should live in .codex/rules/*.rules.
+
+allowed_approval_policies = ["untrusted", "on-request"]
+allowed_sandbox_modes = ["read-only", "workspace-write"]
+
+[rules]
+prefix_rules = [
+  { pattern = [{ token = "git" }, { token = "push" }], decision = "forbidden", justification = "git push is blocked by project policy." },
+  { pattern = [{ any_of = ["cat", "sed", "awk", "grep", "rg", "head", "tail", "less", "more", "bat"] }, { any_of = [".env", "./.env", ".env.*", "./.env.*", ".env.local", "./.env.local", ".env.development", "./.env.development", ".env.production", "./.env.production", ".env.test", "./.env.test", ".env.staging", "./.env.staging", ".dev.vars", "./.dev.vars", "**/.env", "./**/.env", "**/.env.*", "./**/.env.*", "*/.env", "*/*.env", "*/.env.*", "*/*.env.*", "**/.dev.vars", "./**/.dev.vars", "*/.dev.vars", "*/*.dev.vars"] }], decision = "forbidden", justification = "Reading environment files is blocked by project policy." },
+  { pattern = [{ token = "find" }, { token = "." }, { token = "-name" }, { any_of = [".env", ".env.*", ".dev.vars", ".dev.vars.*"] }], decision = "forbidden", justification = "Listing environment files is blocked by project policy." }
+]

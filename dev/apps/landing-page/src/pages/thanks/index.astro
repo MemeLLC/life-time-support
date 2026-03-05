@@ -1,0 +1,33 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import type { Metadata } from "@lib/metadata.types";
+import Footer from "../_Footer.tsx";
+
+const metadata: Metadata = {
+  title: "送信完了 | ライフタイムサポート",
+  description: "お問い合わせありがとうございます。",
+};
+---
+
+<Layout metadata={metadata}>
+  <main class="mx-auto max-w-3xl px-6 py-24">
+    <div class="space-y-6 text-center">
+      <h1 class="text-3xl font-bold">送信が完了しました</h1>
+      <p class="text-muted-foreground">
+        追加情報をお送りいただきありがとうございます。<br />
+        2営業日以内に担当者よりご連絡いたします。
+      </p>
+      <div class="flex flex-col items-center gap-3">
+        <a href="/" class="button mx-auto w-fit" data-variant="default"> TOPへ戻る </a>
+        <a
+          href="https://www.life-time-support.com"
+          class="button mx-auto w-fit"
+          data-variant="outline"
+        >
+          会社ホームページへ
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer client:visible />
+</Layout>

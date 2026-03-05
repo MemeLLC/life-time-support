@@ -1,0 +1,32 @@
+{
+  "name": "@life-time-support/line",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "dev:cloudflare": "astro build --watch && wrangler pages dev dist",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "deploy": "astro build && wrangler pages deploy dist --project-name=line"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@fontsource-variable/noto-sans-jp": "^5.2.10",
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.17.1",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.18"
+  }
+}

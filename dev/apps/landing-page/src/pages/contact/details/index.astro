@@ -1,0 +1,25 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import type { Metadata } from "@lib/metadata.types";
+import { ChevronLeft } from "lucide-react";
+import DetailsForm from "./_Form.tsx";
+import Footer from "../../_Footer.tsx";
+
+const metadata: Metadata = {
+  title: "追加情報の入力 | ライフタイムサポート",
+  description: "お問い合わせの追加情報をご入力ください。",
+};
+---
+
+<Layout metadata={metadata}>
+  <header class="p-6">
+    <a href="/" class="flex items-center gap-2 text-xl font-bold md:text-2xl">
+      <ChevronLeft size={24} />
+      戻る
+    </a>
+  </header>
+  <main class="mx-auto max-w-3xl px-6 py-12">
+    <DetailsForm client:load />
+  </main>
+  <Footer client:visible />
+</Layout>

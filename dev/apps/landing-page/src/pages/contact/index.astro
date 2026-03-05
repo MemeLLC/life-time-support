@@ -1,0 +1,25 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import type { Metadata } from "@lib/metadata.types";
+import { ChevronLeft } from "lucide-react";
+import Form from "./_Form.tsx";
+import Footer from "../_Footer.tsx";
+
+const metadata: Metadata = {
+  title: "メールでのお問い合わせ | ライフタイムサポート",
+  description: "メールでのお問い合わせはこちらから。",
+};
+---
+
+<Layout metadata={metadata}>
+  <header class="p-6">
+    <a href="/" class="flex items-center gap-2 text-xl font-bold md:text-2xl">
+      <ChevronLeft size={24} />
+      戻る
+    </a>
+  </header>
+  <main class="mx-auto max-w-3xl px-6 py-12">
+    <Form client:load />
+  </main>
+  <Footer client:visible />
+</Layout>

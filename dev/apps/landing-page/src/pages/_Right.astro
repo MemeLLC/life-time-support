@@ -1,0 +1,22 @@
+---
+import Aside from "@/components/blocks/Aside.astro";
+import SectionLinks from "@/components/blocks/SectionLinks.tsx";
+
+const links: string[] = [
+  "トップ",
+  "初めてのマンションオプション工事の不安",
+  "ライフタイムサポートとは",
+  "オプション工事メニュー",
+  "当てはまる方はこちら",
+  "施工事例",
+  "無料内覧会同行サービス",
+  "料金・比較表",
+  "お客様の声",
+  "利用の流れ",
+  "よくある質問",
+];
+---
+
+<Aside>
+  <SectionLinks links={links} client:visible />
+</Aside>

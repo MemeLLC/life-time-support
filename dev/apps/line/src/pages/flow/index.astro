@@ -1,0 +1,212 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  Building2,
+  MessageCircle,
+  Users,
+  Search,
+  ClipboardCheck,
+  Key,
+  Hammer,
+  Package,
+} from "lucide-react";
+
+const steps = [
+  {
+    number: "01",
+    title: "マンション購入",
+    description: "新築マンションのご購入おめでとうございます。ここから新居への準備が始まります。",
+    Icon: Building2,
+  },
+  {
+    number: "02",
+    title: "お問い合わせ",
+    description:
+      "ライフタイムサポートへお問い合わせください。オプション会前後や内覧会前など、お客様のタイミングでご相談いただけます。",
+    Icon: MessageCircle,
+  },
+  {
+    number: "03",
+    title: "インテリアオプション会",
+    description:
+      "売主主催のオプション会に参加。フロアコーティングやエコカラットなどのオプションを検討します。",
+    Icon: Users,
+  },
+  {
+    number: "04",
+    title: "内覧会",
+    description:
+      "完成したお部屋を初めて確認する大切な機会。施工不備がないか、図面との相違がないかをチェックします。",
+    Icon: Search,
+  },
+  {
+    number: "05",
+    title: "確認会",
+    description: "内覧会で指摘した内容が正しく修繕されているか、現地で最終確認を行います。",
+    Icon: ClipboardCheck,
+  },
+  {
+    number: "06",
+    title: "鍵渡し",
+    description: "いよいよ新居の鍵をお受け取り。この日からお部屋への出入りが可能になります。",
+    Icon: Key,
+  },
+  {
+    number: "07",
+    title: "施工",
+    description:
+      "マンションオプションの工事を実施。フロアコーティングやエコカラットなど、ご注文いただいた施工を行います。",
+    Icon: Hammer,
+  },
+  {
+    number: "08",
+    title: "施工完了・アフターサポート",
+    description:
+      "すべての施工が完了し、お引き渡しとなります。その後も安心のアフターサポートで新生活をサポートいたします。",
+    Icon: Package,
+  },
+];
+---
+
+<Layout>
+  <main class="min-h-screen overflow-hidden">
+    <section class="py-8 sm:py-16">
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="mb-16 text-center md:mb-24">
+          <div class="mb-6 inline-flex items-center gap-2">
+            <span class="bg-primary h-[2px] w-12"></span>
+            <span class="text-primary text-sm font-bold tracking-[0.3em]">FLOW</span>
+            <span class="bg-primary h-[2px] w-12"></span>
+          </div>
+          <h1 class="text-foreground mb-6 text-4xl font-black tracking-tight md:text-6xl">
+            ご利用の<span class="text-primary">流れ</span>
+          </h1>
+          <p class="text-foreground/60 mx-auto max-w-2xl text-lg leading-relaxed">
+            お問い合わせから施工完了まで、<br class="md:hidden" />
+            安心のサポート体制でご対応いたします
+          </p>
+        </div>
+
+        <div class="relative">
+          <div class="space-y-8 md:space-y-0">
+            {
+              steps.map((step, index) => (
+                <div
+                  class={`flow-step relative ${index % 2 === 0 ? "md:pr-[55%]" : "md:pl-[55%]"}`}
+                  style={`animation-delay: ${index * 150}ms`}
+                >
+                  <div
+                    class={`group border-foreground/5 hover:border-primary/20 relative rounded-2xl border bg-white p-6 shadow-[0_4px_40px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out hover:shadow-[0_8px_60px_rgba(255,137,0,0.12)] md:p-8 ${index % 2 === 0 ? "md:mr-8" : "md:ml-8"} `}
+                  >
+                    <div
+                      class={`absolute -top-4 ${index % 2 === 0 ? "left-6 md:right-6 md:left-auto" : "left-6"} flex items-center gap-3`}
+                    >
+                      <span class="from-primary to-primary/80 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br text-lg font-black text-white shadow-[0_4px_20px_rgba(255,137,0,0.4)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        {step.number}
+                      </span>
+                    </div>
+
+                    <div class="pt-6">
+                      <div class="flex items-start gap-4">
+                        <div class="bg-primary/10 text-primary group-hover:bg-primary/20 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300">
+                          <step.Icon size={28} />
+                        </div>
+
+                        <div class="min-w-0 flex-1">
+                          <h3 class="text-foreground mb-2 text-xl font-bold tracking-tight md:text-2xl">
+                            {step.title}
+                          </h3>
+                          <p class="text-foreground/60 text-sm leading-relaxed md:text-base">
+                            {step.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class={`absolute bottom-0 ${index % 2 === 0 ? "right-0" : "left-0"} h-20 w-20 overflow-hidden rounded-br-2xl`}
+                    >
+                      <div class="from-primary/5 absolute right-0 bottom-0 h-40 w-40 translate-x-20 translate-y-20 transform bg-linear-to-tl to-transparent" />
+                    </div>
+                  </div>
+
+                  <div
+                    class={`border-primary absolute top-1/2 left-1/2 z-10 hidden h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] bg-white shadow-[0_0_0_4px_rgba(255,137,0,0.2)] md:flex`}
+                  />
+
+                  {index < steps.length - 1 && (
+                    <div class="flex justify-center py-4 md:hidden">
+                      <svg
+                        class="text-primary/40 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mt-16 text-center md:mt-24">
+          <p class="text-foreground/50 text-sm md:text-base">
+            ご不明な点がございましたら、お気軽にメッセージをお送りください。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .flow-step {
+    opacity: 0;
+    animation: flowStepIn 0.8s ease-out forwards;
+  }
+
+  @keyframes flowStepIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered animation for mobile arrows */
+  .flow-step:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .flow-step:nth-child(2) {
+    animation-delay: 150ms;
+  }
+  .flow-step:nth-child(3) {
+    animation-delay: 300ms;
+  }
+  .flow-step:nth-child(4) {
+    animation-delay: 450ms;
+  }
+  .flow-step:nth-child(5) {
+    animation-delay: 600ms;
+  }
+  .flow-step:nth-child(6) {
+    animation-delay: 750ms;
+  }
+  .flow-step:nth-child(7) {
+    animation-delay: 900ms;
+  }
+  .flow-step:nth-child(8) {
+    animation-delay: 1050ms;
+  }
+</style>

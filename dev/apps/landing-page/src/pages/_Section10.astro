@@ -1,0 +1,35 @@
+---
+const steps = [
+  "LINE追加またはフォーム送信",
+  "写真送信（図面OK）",
+  "打ち合わせ＆工事提案",
+  "概算見積り",
+  "内覧会同行（任意）",
+  "仕様決定",
+  "施工",
+  "アフターサポート",
+];
+---
+
+<section id="利用の流れ" class="bg-neutral-100 pt-4">
+  <div class="space-y-6 p-6">
+    <header class="text-center">
+      <h2 class="text-2xl font-bold">利用の流れ</h2>
+    </header>
+
+    <ol class="space-y-4">
+      {
+        steps.map((step, index) => (
+          <li class="flex items-center gap-4">
+            <div class="flex size-[52px] items-center justify-center rounded-lg bg-orange-100 text-2xl font-bold">
+              0{index + 1}
+            </div>
+            <p class="text-xl font-bold">{step}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="h-9 w-full bg-orange-100 [clip-path:polygon(50%_0,0_100%,100%_100%)]"></div>
+</section>

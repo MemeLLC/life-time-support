@@ -1,0 +1,557 @@
+---
+import { Image } from "astro:assets";
+import {
+  CircleCheck,
+  Shield,
+  Users,
+  Heart,
+  Clock,
+  Wrench,
+  ClipboardCheck,
+  Pointer,
+  CalendarDays,
+  House,
+  ChevronRight,
+} from "lucide-react";
+import imgDoorWarp from "../../assets/ドアの反り.jpg";
+import imgDoorKnob from "../../assets/ドアノブの不良.jpg";
+import imgDaboBreak from "../../assets/収納内ダボ破損.jpg";
+import imgKitchenLevel from "../../assets/キッチンの水平が取れていない.jpg";
+import imgSheetPeel from "../../assets/シート材の剥がれ.jpg";
+import imgCeilingHeight from "../../assets/天井高の変更.jpg";
+import imgKitchenCounter from "../../assets/キッチンカウンターが斜め.jpg";
+import imgKitchenDoor from "../../assets/キッチン収納の扉のズレ.jpg";
+import imgMailbox from "../../assets/新聞受けの設置不良.jpg";
+import imgHero from "../../assets/内覧会.jpg";
+
+const benefits = [
+  {
+    Icon: CircleCheck,
+    title: "プロの目で不具合を発見",
+    description:
+      "目視では見落としやすい天井高の変更やキッチンカウンターの傾きなど、専門家だからこそ気づける施工不備を検出します。",
+  },
+  {
+    Icon: Shield,
+    title: "入居後トラブルを未然に防止",
+    description:
+      "設備の故障、インテリアの不具合、セキュリティの問題、騒音問題などを事前に把握し、入居後のトラブルを防ぎます。",
+  },
+  {
+    Icon: Users,
+    title: "売主との交渉を有利に",
+    description:
+      "第三者の専門家が客観的な立場から指摘することで、売主に誤魔化されることなく、正当な対応を引き出せます。",
+  },
+  {
+    Icon: Heart,
+    title: "安心して新居へ入居",
+    description:
+      "中立的な立場から専門的なサポートを受けることで、心ゆくまで新居を確認し、安心して入居の日を迎えられます。",
+  },
+];
+
+const checkItems = [
+  {
+    area: "玄関",
+    count: 12,
+    examples: "ドアの開閉・施錠、ドア枠の固定、床の平坦性・傷・汚れ、壁・天井の状態",
+  },
+  {
+    area: "リビング",
+    count: 16,
+    examples: "窓の開閉・施錠、インターホン、エアコン設置確認、床鳴り、壁・天井の状態",
+  },
+  {
+    area: "キッチン",
+    count: 20,
+    examples: "シンク・水栓の動作、換気扇、収納の開閉、カウンターの傾斜、設備の傷・汚れ",
+  },
+  {
+    area: "浴室・洗面",
+    count: 18,
+    examples: "給排水の確認、換気扇、鏡・収納の状態、コーキングの仕上がり",
+  },
+];
+
+const targetUsers = [
+  "新築マンションの引渡しが近い方",
+  "自分でのチェックに不安がある方",
+  "初めての内覧会で何を確認すべきかわからない方",
+  "自分で確認したものの判断がつかない箇所がある方",
+];
+
+const conditions = [
+  { item: "ハウスコーティング", condition: "小計6万円以上" },
+  { item: "窓ガラスフィルム", condition: "施工面積6㎡以上" },
+  { item: "エコカラット", condition: "面積問わず対象" },
+  { item: "バルコニータイル", condition: "施工面積6㎡以上" },
+  { item: "ダウンライト", condition: "小計20万円以上" },
+  { item: "オーダー家具・システム収納", condition: "20万円以上" },
+];
+
+const problemExamples = [
+  {
+    title: "ドアの反り",
+    description: "ドアが反ってしまいドアの上部もしくは下部が押すとカパカパと浮いている",
+    image: imgDoorWarp,
+  },
+  {
+    title: "ドアノブの不良",
+    description: "穴の位置のズレなどでドアノブが動かない・戻らない。何度か動かして確認",
+    image: imgDoorKnob,
+  },
+  {
+    title: "収納内ダボ破損",
+    description: "ダボは棚板を乗せてある部材。このダボが破損すると棚板が水平に置けずガタガタに",
+    image: imgDaboBreak,
+  },
+  {
+    title: "キッチンの水平が取れていない",
+    description: "水平器で確認をすることで、わずかな傾斜を確認",
+    image: imgKitchenLevel,
+  },
+  {
+    title: "シート材の剥がれ",
+    description: "シートフローリングのシート材が剥がれ、中の基材MDFが見えてしまっている",
+    image: imgSheetPeel,
+  },
+  {
+    title: "天井高の変更",
+    description: "事前説明なく、配管の関係等で天井高が変わっていることもあるので確認",
+    image: imgCeilingHeight,
+  },
+  {
+    title: "キッチンカウンターが斜め",
+    description: "キッチンカウンターの水平が取れていない。長いものはズレが生じやすいので注意",
+    image: imgKitchenCounter,
+  },
+  {
+    title: "キッチン収納の扉のズレ",
+    description: "キッチン収納の扉がズレているので、マスキングテープで印付け",
+    image: imgKitchenDoor,
+  },
+  {
+    title: "新聞受けの設置不良",
+    description: "玄関の外にある新聞受けが曲がっている。これも後付けであるため、確認が必要",
+    image: imgMailbox,
+  },
+];
+---
+
+<article
+  class="overflow-x-visible overflow-y-clip rounded-3xl bg-white shadow-[0_4px_40px_rgba(0,0,0,0.08)]"
+>
+  <!-- Hero Section -->
+  <div class="relative min-h-[320px] md:min-h-[400px]">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <Image src={imgHero} alt="内覧会同行サービス" class="h-full w-full object-cover" />
+      <!-- Overlay for text readability -->
+      <div
+        class="from-foreground/90 via-foreground/70 to-foreground/40 absolute inset-0 bg-linear-to-r"
+      >
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div
+      class="relative z-10 flex h-full min-h-[320px] flex-col justify-center px-6 py-10 md:min-h-[400px] md:px-10 md:py-14"
+    >
+      <!-- Badge -->
+      <div
+        class="bg-primary shadow-primary/30 mb-4 inline-flex items-center gap-2 self-start rounded-full px-4 py-2 text-sm font-bold text-white shadow-lg"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"
+          ></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+        </span>
+        条件達成で完全無料
+      </div>
+
+      <!-- Title -->
+      <h2 class="mb-4 text-3xl font-black tracking-tight text-white md:text-5xl">
+        内覧会<br class="md:hidden" />同行サービス
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="mb-6 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
+        経験豊富な住宅のプロが、新築マンションの内覧会に同行。
+        施工不備や図面との相違がないか、専門家の目で徹底チェックします。
+      </p>
+
+      <!-- Key Points -->
+      <div class="flex flex-wrap gap-3">
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm"
+        >
+          <CircleCheck className="text-primary" size={14} />
+          208項目以上を検査
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm"
+        >
+          <Shield className="text-primary" size={14} />
+          一級建築士監修
+        </span>
+      </div>
+    </div>
+
+    <!-- Decorative bottom gradient -->
+    <div class="absolute right-0 bottom-0 left-0 h-16 bg-linear-to-t from-white to-transparent">
+    </div>
+  </div>
+
+  <div class="py-6 md:py-10">
+    <!-- Benefits Section -->
+    <section class="mb-12 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >1</span
+        >
+        サービスのメリット
+      </h3>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {
+          benefits.map((benefit) => (
+            <div class="border-foreground/5 bg-foreground/1 hover:border-primary/20 rounded-2xl border p-5 transition-all duration-300 hover:shadow-lg">
+              <div class="bg-primary/10 mb-3 flex h-12 w-12 items-center justify-center rounded-xl">
+                <benefit.Icon className="text-primary" size={24} />
+              </div>
+              <h4 class="text-foreground mb-2 font-bold">{benefit.title}</h4>
+              <p class="text-foreground/60 text-sm leading-relaxed">{benefit.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Target Users -->
+    <section class="mb-12 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >2</span
+        >
+        このような方におすすめ
+      </h3>
+      <div class="bg-secondary/5 rounded-2xl p-6">
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {
+            targetUsers.map((user) => (
+              <li class="flex items-start gap-3">
+                <CircleCheck className="mt-0.5 shrink-0 text-secondary" size={20} />
+                <span class="text-foreground/80">{user}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Check Items -->
+    <section class="mb-12 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >3</span
+        >
+        チェック項目（3LDKで208項目以上）
+      </h3>
+      <div class="mb-6 grid gap-4 sm:grid-cols-2">
+        {
+          checkItems.map((item) => (
+            <div class="border-foreground/10 rounded-xl border p-4">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-foreground font-bold">{item.area}</span>
+                <span class="bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-bold">
+                  {item.count}項目
+                </span>
+              </div>
+              <p class="text-foreground/60 text-sm">{item.examples}など</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Real Problem Examples - Carousel -->
+    <section class="mb-12">
+      <div class="px-6 md:px-10">
+        <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+          <span
+            class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+            >4</span
+          >
+          実際に見つかった不具合事例
+        </h3>
+        <p class="text-foreground/70 mb-6 text-sm">
+          内覧会同行サービスで実際に発見され、引渡し前に修繕された不具合の事例です。
+        </p>
+      </div>
+      <!-- Carousel Container - Full bleed (no px) -->
+      <div class="scrollbar-hide flex gap-3 overflow-x-auto px-6 pb-4 md:px-10">
+        {
+          problemExamples.map((example) => (
+            <div
+              class="border-foreground/10 hover:border-primary/20 shrink-0 overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:shadow-lg"
+              style="width: 240px;"
+            >
+              <div class="bg-foreground/5 h-40 overflow-hidden">
+                <Image
+                  src={example.image}
+                  alt={example.title}
+                  width={240}
+                  height={160}
+                  class="h-full w-full object-cover"
+                />
+              </div>
+              <div class="p-3">
+                <h4 class="text-foreground mb-1.5 text-sm font-bold">{example.title}</h4>
+                <p class="text-foreground/60 line-clamp-3 text-xs leading-relaxed">
+                  {example.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Service Details -->
+    <section class="mb-12 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >5</span
+        >
+        サービス詳細
+      </h3>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="border-foreground/10 flex items-start gap-4 rounded-xl border p-4">
+          <div
+            class="bg-secondary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          >
+            <Clock className="text-secondary" size={20} />
+          </div>
+          <div>
+            <p class="text-foreground font-bold">所要時間</p>
+            <p class="text-foreground/60 text-sm">
+              検査：1時間30分〜2時間<br />
+              指摘共有含め：2時間30分〜3時間
+            </p>
+          </div>
+        </div>
+        <div class="border-foreground/10 flex items-start gap-4 rounded-xl border p-4">
+          <div
+            class="bg-secondary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          >
+            <Wrench className="text-secondary" size={20} />
+          </div>
+          <div>
+            <p class="text-foreground font-bold">使用機材</p>
+            <p class="text-foreground/60 text-sm">
+              レーザー墨出し機、水平器、打診棒、検査鏡、マスキングテープ等
+            </p>
+          </div>
+        </div>
+        <div class="border-foreground/10 flex items-start gap-4 rounded-xl border p-4">
+          <div
+            class="bg-secondary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          >
+            <ClipboardCheck className="text-secondary" size={20} />
+          </div>
+          <div>
+            <p class="text-foreground font-bold">事前準備</p>
+            <p class="text-foreground/60 text-sm">チェックシートを事前に提供いたします</p>
+          </div>
+        </div>
+        <div class="border-foreground/10 flex items-start gap-4 rounded-xl border p-4">
+          <div
+            class="bg-secondary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          >
+            <Users className="text-secondary" size={20} />
+          </div>
+          <div>
+            <p class="text-foreground font-bold">お子様連れOK</p>
+            <p class="text-foreground/60 text-sm">小さなお子様がいてもご利用いただけます</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conditions -->
+    <section class="mb-8 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >6</span
+        >
+        無料利用の条件
+      </h3>
+      <p class="text-foreground/70 mb-4 text-sm">
+        以下のいずれかの工事をご注文いただいたお客様が対象となります。
+      </p>
+      <div class="border-foreground/10 mb-6 overflow-hidden rounded-xl border">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-foreground/10 bg-foreground/2 border-b">
+              <th class="text-foreground px-4 py-3 text-left font-bold">対象工事</th>
+              <th class="text-foreground px-4 py-3 text-left font-bold">条件</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              conditions.map((cond) => (
+                <tr class="border-foreground/5 border-b last:border-b-0">
+                  <td class="text-foreground/80 px-4 py-3">{cond.item}</td>
+                  <td class="text-foreground/60 px-4 py-3">{cond.condition}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-primary/5 rounded-xl p-4">
+        <p class="text-foreground/70 text-sm">
+          <span class="text-primary font-bold">※ 条件未達の場合：</span>
+          実費45,000円（税抜）にてサービスをご利用いただけます。
+        </p>
+      </div>
+    </section>
+
+    <!-- Application Flow -->
+    <section class="mb-12 px-6 md:px-10">
+      <h3 class="text-foreground mb-6 flex items-center gap-3 text-xl font-black">
+        <span
+          class="bg-primary flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
+          >7</span
+        >
+        お申し込みの流れ
+      </h3>
+
+      <div class="relative">
+        <!-- Flow Steps -->
+        <div class="space-y-0">
+          <!-- Step 1 -->
+          <div class="relative flex gap-4">
+            <div class="flex flex-col items-center">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-full bg-[#06C755] text-lg font-bold text-white shadow-lg shadow-[#06C755]/30"
+              >
+                1
+              </div>
+              <div class="h-full w-0.5 bg-linear-to-b from-[#06C755] to-[#06C755]/30"></div>
+            </div>
+            <div class="flex-1 pb-8">
+              <div class="rounded-2xl border border-[#06C755]/20 bg-[#06C755]/5 p-5">
+                <div class="mb-2 flex items-center gap-2">
+                  <Pointer className="h-5 w-5 text-[#06C755]" />
+                  <h4 class="text-foreground font-bold">下のボタンから申し込み</h4>
+                </div>
+                <p class="text-foreground/70 text-sm">
+                  この下にある<span class="font-bold text-[#06C755]">「内覧会同行を申し込む」</span
+                  >ボタンをタップしてください。LINE認証の画面が表示されますので、認証を完了するとお申し込みが受付されます。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative flex gap-4">
+            <div class="flex flex-col items-center">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-full bg-[#06C755]/80 text-lg font-bold text-white"
+              >
+                2
+              </div>
+              <div class="h-full w-0.5 bg-linear-to-b from-[#06C755]/30 to-[#06C755]/10"></div>
+            </div>
+            <div class="flex-1 pb-8">
+              <div class="border-foreground/10 bg-foreground/2 rounded-2xl border p-5">
+                <div class="mb-2 flex items-center gap-2">
+                  <CalendarDays className="text-foreground/60 h-5 w-5" />
+                  <h4 class="text-foreground font-bold">ヒアリング・日程調整</h4>
+                </div>
+                <p class="text-foreground/70 text-sm">
+                  内覧会の日程や物件情報をお伺いし、同行スタッフのスケジュールを調整いたします。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative flex gap-4">
+            <div class="flex flex-col items-center">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-full bg-[#06C755]/60 text-lg font-bold text-white"
+              >
+                3
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="border-foreground/10 bg-foreground/2 rounded-2xl border p-5">
+                <div class="mb-2 flex items-center gap-2">
+                  <House className="text-foreground/60 h-5 w-5" />
+                  <h4 class="text-foreground font-bold">内覧会当日に同行</h4>
+                </div>
+                <p class="text-foreground/70 text-sm">
+                  当日、経験豊富な専門スタッフが内覧会に同行し、208項目以上の検査を実施します。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Box -->
+      <a
+        href="https://liff.line.me/2008726300-K0dAXlhO/landing?follow=%40ubp5516f&lp=38UNd0&liff_id=2008726300-K0dAXlhO"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-8 block overflow-hidden rounded-2xl bg-linear-to-br from-[#06C755] to-[#04a648] transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#06C755]/30"
+      >
+        <div class="relative p-6">
+          <!-- Decorative circles -->
+          <div class="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-white/10"></div>
+          <div class="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-white/5"></div>
+
+          <div class="relative flex flex-col items-center text-center sm:flex-row sm:text-left">
+            <div
+              class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 sm:mr-5 sm:mb-0"
+            >
+              <svg class="h-9 w-9 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"
+                ></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <p class="mb-1 text-lg font-bold text-white">内覧会同行を申し込む</p>
+              <p class="text-sm text-white/80">内覧会の日程が決まっていなくてもOK！</p>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-4">
+              <span
+                class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-bold text-[#06C755] shadow-lg transition-transform duration-300 group-hover:scale-105"
+              >
+                メッセージを送る
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Notes -->
+    <div class="bg-foreground/2 mx-6 rounded-xl p-4 md:mx-10">
+      <p class="text-foreground/50 text-xs leading-relaxed">
+        ※ 内覧会で指摘した事項は、引渡し前に売主側で無料修繕される可能性があります。<br />
+        ※ サービスの詳細・ご予約についてはお気軽にお問い合わせください。
+      </p>
+    </div>
+  </div>
+</article>

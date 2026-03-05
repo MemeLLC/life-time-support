@@ -1,0 +1,15 @@
+---
+import { cn } from "@lib/utils";
+
+interface Props {
+  className?: string;
+  fullWidth?: boolean;
+  id?: string;
+}
+
+const { className, fullWidth, id } = Astro.props;
+---
+
+<section id={id} class={cn(!fullWidth && "px-6", className)}>
+  <slot />
+</section>

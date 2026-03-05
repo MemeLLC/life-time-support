@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "307d5feae56161506fa2893ab3a1b3e5",
+  "name": "mail-server",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-02-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "ENVIRONMENT": "production", // 開発環境は .dev.vars で上書き
+    "EMAIL_ADMIN": "info@life-time-support.com", // 受信メールの宛先
+    "EMAIL_NOTIFICATION": "お問い合わせ通知 <notifications@life-time-support.com>", // 通知メールの送信元
+    "EMAIL_NOREPLY": "ライフタイムサポート <noreply@life-time-support.com>" // 自動返信メールの送信元
+  }
+}

@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import concernImage from "@assets/concern.svg";
+import { AlarmClock, Smartphone, Repeat2, type LucideIcon } from "lucide-react";
+
+const concerns = [
+  "見積もりが高いか安いか分からない",
+  "業者によって説明がバラバラ",
+  "内覧会で不具合を見落としそう",
+  "工事後の品質や保証が心配",
+  "忙しくて情報収集に時間がかけられない",
+];
+
+const features: { icon: LucideIcon; title: string; description: string }[] = [
+  { icon: AlarmClock, title: "今すぐ", description: "最短即日の\nご相談から対応" },
+  { icon: Smartphone, title: "どこでも", description: "オンライン・店舗など\n場所・形式は自由" },
+  { icon: Repeat2, title: "何度でも", description: "正解が見つかるまで\n何度でも相談OK" },
+];
+---
+
+<section
+  id="初めてのマンションオプション工事の不安"
+  class="flex flex-col items-center gap-6 bg-orange-100 px-6 pt-12 pb-6"
+>
+  <h2 class="text-center font-bold">
+    <span class="block"> 初めてのオプション工事。 </span>
+    <span class="mt-1.5 block text-2xl">
+      <span class="block">
+        こんな<span class="text-navy-500">不安</span>は
+      </span>
+      <span class="block"> ありませんか？？ </span>
+    </span>
+  </h2>
+  <div class="flex w-full flex-col items-center">
+    <Image
+      src={concernImage}
+      alt="不安を抱える人のイラスト"
+      width={240}
+      class="w-[240px]"
+      loading="eager"
+    />
+    <div class="text-navy-500 w-full space-y-5 text-center font-bold">
+      {
+        concerns.map((concern) => (
+          <div class="relative w-full bg-neutral-100 py-2">
+            <p>{concern}</p>
+            <div class="absolute -top-2.5 left-2 text-2xl" aria-hidden="true">
+              “
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <p>
+    など、オプション工事を具体的に始める前の気になる疑問を解消し、
+    オプション工事をする・しないの選択から、
+    施工メニュー選定・施工・アフターフォローまでをワンストップで提供します。
+  </p>
+  <div class="flex flex-col items-center gap-4">
+    <h3 class="text-center text-2xl font-bold text-orange-500">相談は何度でも￥０</h3>
+    <div class="space-y-4 rounded-2xl bg-neutral-100 p-4 font-bold">
+      {
+        features.map((feature) => (
+          <div class="flex items-center gap-2">
+            <feature.icon size={24} />
+            <h4 class="w-20 shrink-0 text-xl">{feature.title}</h4>
+            <p class="text-xs whitespace-pre-wrap">{feature.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <p>
+    <span class="block">
+      「ライフタイムサポート」は、<span class="font-bold"
+        >マンションオプション工事に特化した専門スタッフのみで運営</span
+      >しています。
+    </span>
+    <span class="block">
+      現場とお客様対応に集中できる体制を整えることで、お客様との対話時間を一般的な業者の約2倍確保でき、工事内容のご相談だけでなく、<span
+        class="font-bold"
+        >“新居の暮らしづくり”にまつわるあらゆるお困りごとにもしっかり寄り添える体制を実現しています。</span
+      >
+    </span>
+  </p>
+</section>

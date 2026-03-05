@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import needsImage from "@assets/needs.png";
+import offersImage from "@assets/offers.png";
+---
+
+<section id="当てはまる方はこちら" class="space-y-14 bg-neutral-100 py-6 pb-6">
+  <div class="space-y-6">
+    <h2 class="text-center text-2xl font-bold">
+      <span class="block">ライフタイムサポートの</span>
+      <span class="block">オプション工事は</span>
+      <span class="block text-[32px] text-orange-500">こんな方におすすめ！</span>
+    </h2>
+    <Image
+      src={needsImage}
+      alt="こんな方におすすめ"
+      width={528}
+      class="mx-auto w-full max-w-[264px]"
+      loading="lazy"
+    />
+  </div>
+  <div class="space-y-8 px-6">
+    <h3 class="text-center text-2xl font-bold">
+      <span class="block">後悔のないオプション工事は</span>
+      <span class="block">相談が鍵！</span>
+    </h3>
+    <Image
+      src={offersImage}
+      alt="ライフタイムサポートの提供内容"
+      width={740}
+      class="mx-auto w-full max-w-[370px]"
+      loading="lazy"
+    />
+    <p class="text-center font-bold">
+      <span class="block"
+        >単に“人気のオプション”を入れるだけでは、5年後、10年後も「やってよかった」と思える住まいづくりにはなりません。</span
+      >
+      <span class="block"
+        >「そもそも本当に必要な工事なのか？」「将来の生活を考えると、どこまで工事すべきなのか？」といった、お客様の暮らしにフィットする“最適な工事条件”の整理からお手伝いします。</span
+      >
+    </p>
+  </div>
+</section>
