@@ -1,0 +1,19 @@
+{
+  "name": "analytics-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch:ga4": "tsx fetch-ga4.ts",
+    "fetch:gsc": "tsx fetch-search-console.ts",
+    "fetch:all": "npm run fetch:ga4 && npm run fetch:gsc"
+  },
+  "dependencies": {
+    "@google-analytics/admin": "^9.0.1",
+    "@google-analytics/data": "^4",
+    "googleapis": "^144"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "tsx": "^4"
+  }
+}

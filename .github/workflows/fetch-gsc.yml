@@ -1,0 +1,35 @@
+name: Fetch Google Search Console Data
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 毎日 00:00 UTC (09:00 JST)
+  workflow_dispatch: # 手動実行
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    if: vars.ENABLE_GSC == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: .github/scripts
+        run: npm ci
+
+      - name: Fetch GSC data
+        working-directory: .github/scripts
+        env:
+          GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
+          GCP_PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+        run: npx tsx fetch-search-console.ts
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update GSC data"
+          file_pattern: "contexts/data/google-search-console/**/*.csv"

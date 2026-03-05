@@ -1,0 +1,11 @@
+model = "gpt-5.2"
+
+model_reasoning_effort = "high"
+
+web_search = "live"
+
+approval_policy = "never"
+
+hide_agent_reasoning = false
+
+show_raw_agent_reasoning = true
