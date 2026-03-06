@@ -1,12 +1,6 @@
 ---
 name: pdf-doc
-version: 1.0.0
-description: >
-  React + Tailwind で構造化されたPDF文書（テキスト選択・リンク可能）を生成するスキル。
-  Playwright の page.pdf() を使い、ネイティブPDFとして書き出す。
-  ユーザーが以下のいずれかに言及した場合に使用する：
-  「請求書を作って」「見積書を作成」「契約書」「納品書」「PDF文書」
-  「レポートをPDFで」「文書をPDFに」「領収書」「注文書」「PDF書き出し」。
+description: React + Tailwind で構造化されたPDF文書（テキスト選択・リンク可能）を生成するスキル。Playwright の page.pdf() を使い、ネイティブPDFとして書き出す。ユーザーが以下のいずれかに言及した場合に使用する：「請求書を作って」「見積書を作成」「契約書」「納品書」「PDF文書」「レポートをPDFで」「文書をPDFに」「領収書」「注文書」「PDF書き出し」。
 ---
 
 # PDF文書作成
@@ -21,6 +15,12 @@ React + Vite + Tailwind CSS でA4文書を作成し、Playwright の `page.pdf()
 pdf-doc/                            # このスキルのディレクトリ
 ├── SKILL.md
 ├── scripts/                        # テンプレートファイル（変更しない）
+│   ├── package.json
+│   ├── index.html
+│   ├── vite.config.ts
+│   ├── tsconfig.json / tsconfig.app.json / tsconfig.node.json
+│   ├── main.tsx / index.css / App.tsx / Page.tsx
+│   ├── export-pdf.ts
 │   └── templates/                  # 文書テンプレート（Git管理）
 │       ├── invoice/                # 請求書テンプレート
 │       │   ├── Page01.tsx
@@ -99,7 +99,7 @@ cd "$WS" && npm install
 
 ```bash
 SKILL_DIR="<このスキルのディレクトリパス>"
-cp "$SKILL_DIR/scripts/templates/invoice/"*.{tsx,ts} "$SKILL_DIR/workspace/src/pages/"
+cp "$SKILL_DIR/scripts/templates/invoice/"* "$SKILL_DIR/workspace/src/pages/"
 ```
 
 利用可能なテンプレート:

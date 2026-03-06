@@ -1,18 +1,25 @@
 ---
 name: video-generation
-description: >
-  Veo 3.1（Google）を使ってAI動画を生成・編集するスキル。
-  テキストから動画生成、画像から動画生成に対応。音声・セリフ・効果音の同期生成も可能。
-  ユーザーが以下のいずれかに言及した場合に使用する：
-  「動画を作って」「動画生成」「AI動画」「ビデオを生成」「映像を作って」
-  「アニメーション動画」「プロモーション動画」「商品紹介動画」「SNS動画」
-  「画像を動画にして」「写真をアニメーションに」「Veo」「動画を作成」
-  「セリフ入り動画」「音声付き動画」「ショート動画」「リール動画」。
+description: AI動画を生成・編集するスキル。テキストから動画生成、画像から動画生成に対応。音声・セリフ・効果音の同期生成も可能。ユーザーが動画生成・AI動画・Veoに言及した場合に使用する。
 ---
 
 # 動画生成（Veo 3.1）
 
-あなたはAI動画生成の専門家です。Google Veo 3.1 APIを使い、ユーザーの要求に応じた高品質な動画を生成します。
+Google Veo 3.1 APIを使い、ユーザーの要求に応じた高品質な動画を生成する。
+
+## ディレクトリ構成
+
+```
+video-generation/
+├── SKILL.md                        # 本ファイル（ワークフロー・スクリプト使用法・オプション）
+├── references/
+│   └── prompt-guide.md             # プロンプト詳細リファレンス（5要素フォーミュラ・カメラワーク辞書・音声演出・テンプレート）
+└── scripts/
+    ├── text_to_video.py            # テキスト → 動画（基本の生成スクリプト）
+    ├── image_to_video.py           # 画像 → 動画（開始フレーム指定）
+    ├── keyframes_to_video.py       # 開始+終了画像 → 動画（フレーム補間）
+    └── refs_to_video.py            # 参照画像 → 動画（キャラクター・商品の一貫性保持）
+```
 
 ## Veo 3.1の強み
 
@@ -204,82 +211,7 @@ python3 .agents/skills/video-generation/scripts/refs_to_video.py \
 
 ## プロンプト作成ガイド
 
-プロンプトは英語で書くこと。詳細なリファレンスと用途別テンプレートは [references/prompt-guide.md](references/prompt-guide.md) を参照。
-
-### 5要素フォーミュラ
-
-高品質な動画を生成するための基本構造:
-
-```
-[Cinematography] + [Subject] + [Action] + [Context] + [Style & Ambiance]
-```
-
-- **Cinematography**: カメラワーク・構図（`Medium shot`, `Crane shot`, `Tracking shot`）
-- **Subject**: 主役・被写体（外見の詳細を具体的に）
-- **Action**: 動き・行動（`rubbing his temples`, `running through a meadow`）
-- **Context**: 環境・背景（場所、時間帯、天候）
-- **Style & Ambiance**: 雰囲気・ライティング・スタイル（`Cinematic, golden hour, shallow depth of field`）
-
-例:
-```
-Medium shot, a tired corporate worker, rubbing his temples in exhaustion,
-in front of a bulky 1980s computer in a cluttered office late at night.
-The scene is lit by the harsh fluorescent overhead lights and the green
-glow of the monochrome monitor. Retro aesthetic, shot as if on 1980s
-color film, slightly grainy.
-```
-
-### 効果的な映像を得るためのポイント
-
-1. **具体的な形容詞・副詞を使う**: `a woman walking` → `a content woman walking leisurely`
-2. **カメラワークで感情を演出する**: `Crane shot`=壮大さ、`Close-up`=感情の強調、`POV`=没入感
-3. **レンズ・フォーカスを指定する**: `shallow depth of field`, `wide-angle lens`, `macro lens`
-4. **ライティングで雰囲気を作る**: `golden hour`, `neon glow`, `dramatic spotlight`, `dappled sunlight`
-5. **顔を強調したい場合は `portrait` を含める**
-
-### 音声・セリフの演出
-
-Veo 3.1は3種類の音声要素を同期生成できる:
-
-- **セリフ**: 引用符で囲む。話し方も添える → `She whispered, "Where are you going?"`
-- **効果音**: `SFX:` プレフィックスで明示 → `SFX: thunder cracks in the distance`
-- **環境音**: `Ambient:` で背景音を指定 → `Ambient: the quiet hum of a starship bridge`
-
-セリフ付き動画の例:
-```
-Misty Pacific Northwest forest, two exhausted hikers discover fresh claw marks.
-The man turns and says, "That's no ordinary bear."
-The woman replies, voice tight with fear, "Then what is it?"
-SFX: snapping twigs, rough bark scraping. Ambient: a lone bird chirps, wind
-through pine needles.
-```
-
-### タイムスタンプ・プロンプティング
-
-8秒の動画内で複数ショットを時間指定して配置できる。1つの生成で複数カットの映像を作る強力なテクニック:
-
-```
-[00:00-00:02] Medium shot from behind a young explorer as she pushes aside
-a jungle vine to reveal a hidden path.
-[00:02-00:04] Reverse shot of her face, expression filled with awe, gazing
-upon ancient moss-covered ruins. SFX: rustling leaves, distant bird calls.
-[00:04-00:06] Tracking shot following her as she runs her hand over intricate
-carvings on a crumbling stone wall.
-[00:06-00:08] Wide crane shot revealing her standing small in a vast forgotten
-temple complex. SFX: a swelling orchestral score begins.
-```
-
-### ネガティブプロンプトの活用
-
-命令形（`Don't include X`）ではなく、除外したい要素を名詞・形容詞で列挙する:
-
-```
---negative-prompt "blurry, low quality, distorted faces, text overlay, watermark, shaky camera, artifacts"
-```
-
-用途別:
-- **リアル系**: `cartoon, anime, 3D render, CGI look, oversaturated`
-- **商品系**: `people, hands, text, logo, cluttered background`
+プロンプトは英語で書くこと。`[Cinematography] + [Subject] + [Action] + [Context] + [Style & Ambiance]` の5要素フォーミュラで構成する。セリフは引用符、効果音は `SFX:`、環境音は `Ambient:` で指定する。カメラワーク辞書・音声演出の詳細・用途別テンプレートは [prompt-guide.md](references/prompt-guide.md) を参照。
 
 ---
 
@@ -309,4 +241,4 @@ temple complex. SFX: a swelling orchestral score begins.
 
 ## 関連スキル
 
-- **image-generation**: 動画のスタート画像を生成する場合に組み合わせて使用
+- **image-generation**: 動画のスタート画像・参照画像を生成する場合に組み合わせて使用

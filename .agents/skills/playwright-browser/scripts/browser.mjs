@@ -61,7 +61,7 @@ function printUsage() {
 Common options:
   --headful            Show browser window
   --timeout <ms>       Timeout (default: 30000)
-  --wait <ms>          Extra wait after networkidle before screenshot (default: 0)
+  --wait <ms>          Extra wait after networkidle before screenshot (default: 800)
   --user-agent <str>   Custom User-Agent`);
 }
 

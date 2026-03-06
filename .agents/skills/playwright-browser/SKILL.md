@@ -1,16 +1,6 @@
 ---
 name: playwright-browser
-description: >-
-  playwright-coreベースのブラウザ自動操作CLIツールを使い、
-  Webページのスクレイピング、スクリーンショット撮影、Google検索、複数ステップのブラウザ操作を実行する。
-  ユーザーが以下のいずれかに言及した場合に使用する:
-  「サイトを開いて」「ページの内容を取得して」「スクリーンショットを撮って」
-  「Webサイトをスクレイピング」「Google検索して」「検索結果を取得」
-  「競合サイトを見て」「LPを確認して」「広告ライブラリを調べて」
-  「ブラウザで操作して」「ページのmeta情報を取得」「サイト構造を調査」。
-  各リサーチスキル（market-analysis、competitor-analysis、regulatory-research）と
-  組み合わせてリサーチの情報収集に活用できる。
-  seo-analysisスキルと組み合わせて実際のページ構造を取得する際にも有用。
+description: playwright-coreベースのブラウザ自動操作CLIツールを使い、Webページのスクレイピング、スクリーンショット撮影、Google検索、複数ステップのブラウザ操作を実行する。ユーザーが以下のいずれかに言及した場合に使用する:「サイトを開いて」「ページの内容を取得して」「スクリーンショットを撮って」「Webサイトをスクレイピング」「Google検索して」「検索結果を取得」「競合サイトを見て」「LPを確認して」「広告ライブラリを調べて」「ブラウザで操作して」「ページのmeta情報を取得」「サイト構造を調査」。各リサーチスキル（market-analysis、competitor-analysis、regulatory-research）と組み合わせてリサーチの情報収集に活用できる。seo-analysisスキルと組み合わせて実際のページ構造を取得する際にも有用。
 ---
 
 # Playwright Browser CLI
@@ -23,14 +13,7 @@ description: >-
 
 ## パス解決
 
-このスキルのディレクトリは以下のいずれかのパスで参照できる（すべて同一の実体を指す）:
-
-- `.agents/skills/playwright-browser`
-- `.claude/skills/playwright-browser`
-- `.codex/skills/playwright-browser`
-
-以下のドキュメントでは `$SKILL_DIR` と表記する。
-実行時は上記いずれかの実パスに置き換えること。
+以下のドキュメントでは `$SKILL_DIR` と表記する。実行時は `.agents/skills/playwright-browser` に置き換えること（`.claude/skills/` `.codex/skills/` からもシンボリックリンクで参照可能）。
 
 初回は依存関係をインストールする:
 ```bash
@@ -63,18 +46,20 @@ node $SKILL_DIR/scripts/browser.mjs screenshot <url> [--output <path>] [--full-p
 ```
 
 デフォルト保存先: `./screenshots/<timestamp>.png`
-ページ読み込み後、自動的にネットワークが安定するまで待機してからスクリーンショットを撮影する（SPAや動的サイトでもレンダリング完了後の状態をキャプチャ）。
-`--wait` で追加の待機時間を指定可能（アニメーションや遅延ロードが多いサイト向け）。
+ページ読み込み後、networkidle待機 + デフォルト800msの追加待機を経てからスクリーンショットを撮影する（SPAや動的サイトでもレンダリング完了後の状態をキャプチャ）。
+`--wait` で追加待機時間を変更可能（アニメーションや遅延ロードが多いサイトでは増やす）。
+
+**原則 `--full-page` を付けてページ全体を撮影する。** ビューポートのみの撮影が必要な場合だけ省略する。
 
 ```bash
-# ビューポートのみ
-node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example.png
-
-# ページ全体
-node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example-full.png --full-page
+# ページ全体（基本はこれを使う）
+node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example.png --full-page
 
 # アニメーション完了まで追加で2秒待機
-node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example.png --wait 2000
+node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example.png --full-page --wait 2000
+
+# ビューポートのみ（ファーストビューだけ必要な場合）
+node $SKILL_DIR/scripts/browser.mjs screenshot https://example.com --output ./screenshots/example.png
 ```
 
 ### search — Google検索
@@ -172,6 +157,26 @@ node $SKILL_DIR/scripts/browser.mjs interact "https://adstransparency.google.com
 
 - Google検索はBot検知される場合がある。エラーが出たら `--headful` を試す
 - エラーは `{"error": "メッセージ"}` でstderrに出力、exit code 1
-- スクリーンショットは `./screenshots/` に保存するのが慣例
+- スクリーンショットは `./screenshots/` に保存するのが慣例。原則 `--full-page` でページ全体を撮影する
 - interactのactionsはJSON文字列としてシングルクォートで囲む
 - 出力JSONが大きい場合はselectorで対象を絞る
+
+## トラブルシューティング
+
+| 症状 | 原因 | 対処 |
+|------|------|------|
+| `TimeoutError` | ページ読み込みが30秒超 | `--timeout 60000` でタイムアウトを延長 |
+| `Selector "xxx" not found` | CSSセレクタが不正、または要素が動的生成 | ブラウザのDevToolsでセレクタを確認。interactで `wait` アクションを挟んで要素の出現を待つ |
+| Bot検知（CAPTCHA表示） | Google検索でのアクセス制限 | `--headful` を付けて手動でCAPTCHA解決。連続検索を避け間隔を空ける |
+| 出力JSONが巨大 | ページ内のリンク・画像が大量 | `--selector` で対象を絞る（例: `--selector "main"`, `--selector "article"`） |
+| スクリーンショットが途中の状態 | SPAの非同期レンダリングが未完了 | `--wait 2000` 以上で追加待機。interactなら screenshot アクションの `wait` で調整 |
+
+## 関連スキル
+
+| スキル | 連携内容 |
+|--------|----------|
+| **competitor-analysis** | 競合サイトのスクレイピング・スクリーンショット撮影、広告ライブラリ調査に使用する |
+| **market-analysis** | 調査会社のレポートページ、官公庁の統計ページなどの詳細情報取得に使用する |
+| **industry-landscape** | 業界団体のWebサイト、調査会社のレポートページなどの情報取得に使用する |
+| **regulatory-research** | 官公庁の法規制ページ、許認可要件ページの情報取得に使用する |
+| **seo-analysis** | 実際のページ構造・meta情報の取得、競合ページの分析に使用する |

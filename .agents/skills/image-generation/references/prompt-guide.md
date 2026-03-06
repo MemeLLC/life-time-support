@@ -189,7 +189,7 @@ Appetizing natural light photography.
 
 ## 画像編集のプロンプト
 
-画像編集（edit_image.sh）で使う場合の指示パターン:
+画像編集（`image_to_image.py`）で使う場合の指示パターン:
 
 ### 背景の変更
 ```
@@ -233,7 +233,7 @@ Do not modify any other part of the image.
 対策:
 - プロンプトの各要素を改行で区切り、構造化する
 - "not X, but Y" のネガティブ指示を活用する
-- 参考画像がある場合は edit_image.sh で参照させる
+- 参考画像がある場合は `image_to_image.py` で参照させる
 
 ### 人物がリアルすぎる / 不気味の谷
 
